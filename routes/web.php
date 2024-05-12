@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\User\Auth\{RegisterController, LoginController};
+
+use App\Http\Controllers\User\HomeController;
+
+use App\Http\Controllers\User\Account\{UserProfileController, LogoutController, DeleteAccountController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +17,38 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::group(['as' => 'user.'], function() {
 
-Route::get('/', function () {
-    return view('welcome');
+	Route::group(['middleware' => ['guest:web', 'throttle:50'] ], function() {
+
+		Route::controller(RegisterController::class)->group(function () {
+
+			Route::get('register', 'registerForm')->name('registerForm');
+
+			Route::post('register', 'register')->name('register');
+		});
+
+		Route::controller(LoginController::class)->group(function () {
+
+			Route::get('login', 'loginForm')->name('loginForm');
+
+			Route::post('login', 'login')->name('login');
+		});
+	});
+
+	Route::group(['middleware' => ['auth:web']], function() {
+
+		Route::get('', HomeController::class)->name('dashboard');
+
+		Route::controller(UserProfileController::class)->group(function() {
+
+			Route::get('profile', 'profile')->name('profile');
+
+			Route::post('update_profile', 'update_profile')->name('update_profile');
+		});
+
+		Route::get('logout', LogoutController::class)->name('logout');
+
+		Route::delete('delete_account', DeleteAccountController::class)->name('delete_account');
+	});
 });
