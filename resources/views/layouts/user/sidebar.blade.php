@@ -12,7 +12,7 @@
         </a>
       </li><!-- End Home Nav -->
 
-      <li class="nav-item">
+      {{--<li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -28,8 +28,18 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Components Nav -->
+      </li><!-- End Components Nav -->--}}
 
+      <li class="nav-item">
+        <a 
+          class="nav-link {{(request()->is('payments') || request()->is('payments/*')) ? '' : 'collapsed'}}" 
+          href="{{route('user.payments.index')}}"
+        >
+          <i class="bi bi-credit-card"></i>
+          <span>{{__('messages.user.payments.title')}}</span>
+        </a>
+      </li>
+      
       <li class="nav-item">
         <a 
           class="nav-link {{request()->url() == route('user.profile') ? '' : 'collapsed'}}" 

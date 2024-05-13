@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\User\Auth\{RegisterController, LoginController};
-
 use App\Http\Controllers\User\HomeController;
 
+use App\Http\Controllers\User\Auth\{RegisterController, LoginController};
 use App\Http\Controllers\User\Account\{UserProfileController, LogoutController, DeleteAccountController};
+use App\Http\Controllers\User\{CheckoutController, SubscriptionPlanPaymentController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,8 +47,22 @@ Route::group(['as' => 'user.'], function() {
 			Route::post('update_profile', 'update_profile')->name('update_profile');
 		});
 
+		Route::get('checkout/{subscription_plan}', CheckoutController::class)->name('checkout');
+
+		Route::resource('payments', SubscriptionPlanPaymentController::class)->only(['index', 'show'])->scoped([
+			'payment' => 'unique_id'
+		]);
+
 		Route::get('logout', LogoutController::class)->name('logout');
 
 		Route::delete('delete_account', DeleteAccountController::class)->name('delete_account');
 	});
+
+	Route::get('payment-success', function() {
+		return view('users.subscription_plans.success');
+	})->name('payment_success');
+
+	Route::get('payment-cancelled', function() {
+		return view('users.subscription_plans.cancelled');
+	})->name('payment_cancelled');
 });

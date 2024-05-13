@@ -96,16 +96,45 @@ return [
 			"delete_account_note" => "Note : Once you proceed with the deletion of your account, please be aware that all associated data will be permanently lost and cannot be recovered. This includes your profile information, settings, files, and any other data linked to your account.",
 			"delete_account_failed" => "Account deletion failed. Please try again.",
 			"delete_account_success" => "Account has been deleted.",
+			"not_found" => "Profile not found (:email)"
 		],
 
 		"common" => [
 			"na" => "N/A",
 			"enabled" => "Enabled",
-			"disabled" => "Disabled"
+			"disabled" => "Disabled",
+			"failed" => "Failed",
+			"success" => "Success",
+			"no_data_found" => "No Data Found."
 		],
 
 		"errors" => [
 			"too_many_attempts" => "Too many attempts. Please wait for a minute and try again."
+		],
+
+		"subscription_plans" => [
+			'title' => 'Subscription Plans',
+			'amount' => 'Amount',
+			'price' => 'Price',
+			'checkout' => "Checkout",
+			"subscribe" => "Subscribe",
+			"checkout_success" => "Payment success.",
+			"checkout_failed" => "Payment failed.",
+			"webhook_event_error" => "Stripe webhook event received (:event)",
+			"not_found" => "Subscription plan not found (:api_id)"
+		],
+
+		"payments" => [
+			"title" => "Payments",
+			"amount" => "Amount",
+			"payment_id" => "Payment ID",
+			"status" => "Status",
+			"paid_at" => "Paid At",
+			"expire_at" => "Expire At",
+			"subscription_plan" => "Subscription Plan",
+			"action" => "Action",
+			"view" => "View",
+			"details" => "Payment Details"
 		]
 	]
 ];

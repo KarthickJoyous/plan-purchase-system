@@ -21,5 +21,10 @@ class SettingSeeder extends Seeder
             'key' => 'app_logo', 
             'value' => asset('assets/img/logo.png')
         ]);
+
+        Setting::updateOrCreate([
+            'key' => 'currency', 
+            'value' => '₹'
+        ]);
     }
 }
